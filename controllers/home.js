@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const homePage = fs.readFileSync(
-  path.join(__dirname, "views/index.html"),
+  path.join(__dirname, "../views/index.html"),
   "utf-8"
 );
 
