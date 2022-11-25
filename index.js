@@ -22,7 +22,7 @@ router.get("/rap2api/getLoveKnotData", async (ctx) => {
     url: "http://rap2api.taobao.org/app/mock/308003/GET/api/getLoveKnotData",
     json: true,
   };
-  request(options, function (err, res) {
+  request.get(options, function (err, res) {
     if (err) {
       console.log(err);
       return reject({ err: err });
