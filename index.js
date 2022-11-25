@@ -18,18 +18,25 @@ router.get("/", async (ctx) => {
 
 // 首页
 router.get("/rap2api/getLoveKnotData", async (ctx) => {
-  let res = await koaRequest(
-    "http://rap2api.taobao.org/app/mock/308003/GET/api/getLoveKnotData"
-  );
-  ctx.body = res;
+  let result = await koaRequest({
+    url: "http://rap2api.taobao.org/app/mock/308003/GET/api/getLoveKnotData",
+    method: "get",
+    json: true,
+    Headers: {
+      "content-type": "application/json",
+      charset: "UTF-8",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST, GET, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Credentials": "true",
+    },
+  });
+  ctx.body = result.body;
 });
 
 // 首页
 router.get("/api/getLoveKnotData", async (ctx) => {
-  ctx.body = {
-    data: [],
-    message: "哈哈哈哈",
-  };
+  var res = await koa2Req("http://www.baidu.com");
+  ctx.body = res.body;
 });
 
 // 更新计数
