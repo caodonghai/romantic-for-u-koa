@@ -70,7 +70,7 @@ function formatReqParams(ctx, params) {
   url = (params.url || url).replace("/rap2api", "/api");
   method = params.method || method;
 
-  url = `http://${host}/308003/${method}${url}`; // rap2api.taobao.org/app/mock/308003/GET
+  url = `http://${host}/${method}${url}`; // rap2api.taobao.org/app/mock/308003/GET
   console.log({ url, method, params });
   delete params.host;
 
