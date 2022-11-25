@@ -18,23 +18,6 @@ router.get("/", async (ctx) => {
   ctx.body = homePage;
 });
 
-// 首页
-// router.get("/rap2api/getLoveKnotData", async (ctx) => {
-//   let result = await koaRequest({
-//     url: "http://rap2api.taobao.org/app/mock/308003/GET/api/getLoveKnotData",
-//     method: "get",
-//     json: true,
-//     Headers: {
-//       "content-type": "application/json",
-//       charset: "UTF-8",
-//       "Access-Control-Allow-Origin": "*",
-//       "Access-Control-Allow-Methods": "POST, GET, PUT, DELETE, OPTIONS",
-//       "Access-Control-Allow-Credentials": "true",
-//     },
-//   });
-//   ctx.body = result.body;
-// });
-
 // 更新计数
 router.post("/api/count", async (ctx) => {
   const { request } = ctx;
@@ -48,7 +31,7 @@ router.post("/api/count", async (ctx) => {
   }
 
   ctx.body = {
-    code: 0,
+    code: 200,
     data: await Counter.count(),
   };
 });
@@ -58,7 +41,7 @@ router.get("/api/count", async (ctx) => {
   const result = await Counter.count();
 
   ctx.body = {
-    code: 0,
+    code: 200,
     data: result,
   };
 });
