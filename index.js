@@ -6,6 +6,7 @@ const fs = require("fs");
 const path = require("path");
 const koaRequest = require("koa2-request");
 const { init: initDB, Counter } = require("./db");
+const koaRequestProxy = require("./middleware/koaRequestProxy");
 
 const router = new Router();
 
@@ -17,27 +18,35 @@ router.get("/", async (ctx) => {
 });
 
 // 首页
-router.get("/rap2api/getLoveKnotData", async (ctx) => {
-  let result = await koaRequest({
-    url: "http://rap2api.taobao.org/app/mock/308003/GET/api/getLoveKnotData",
-    method: "get",
-    json: true,
-    Headers: {
-      "content-type": "application/json",
-      charset: "UTF-8",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "POST, GET, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Credentials": "true",
-    },
-  });
-  ctx.body = result.body;
-});
+// router.get("/rap2api/getLoveKnotData", async (ctx) => {
+//   let result = await koaRequest({
+//     url: "http://rap2api.taobao.org/app/mock/308003/GET/api/getLoveKnotData",
+//     method: "get",
+//     json: true,
+//     Headers: {
+//       "content-type": "application/json",
+//       charset: "UTF-8",
+//       "Access-Control-Allow-Origin": "*",
+//       "Access-Control-Allow-Methods": "POST, GET, PUT, DELETE, OPTIONS",
+//       "Access-Control-Allow-Credentials": "true",
+//     },
+//   });
+//   ctx.body = result.body;
+// });
 
-// 首页
-router.get("/api/getLoveKnotData", async (ctx) => {
-  var res = await koaRequest("http://www.baidu.com");
-  ctx.body = res.body;
-});
+router.use((ctx, next) => {
+  // 使用
+  let { url } = ctx;
+  if (url.startsWith('/rap2api')) {
+    const data = await ctx.koaRequestProxy({
+      host: 'rap2api.taobao.org/app/mock/308003/GET' // 多代理，nest地址代理到localhost:3000
+    });
+    // 这里可以做一些请求之后需要处理的事情
+    ctx.body = data.body;
+  }
+  await next()
+})
+
 
 // 更新计数
 router.post("/api/count", async (ctx) => {
@@ -79,7 +88,12 @@ app
   .use(logger())
   .use(bodyParser())
   .use(router.routes())
-  .use(router.allowedMethods());
+  .use(router.allowedMethods())
+  .use(
+    koaRequestProxy({
+      apiHost: "rap2api.taobao.org/app/mock/308003/GET", // 全局端口
+    })
+  );
 
 const port = process.env.PORT || 80;
 async function bootstrap() {
