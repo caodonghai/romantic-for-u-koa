@@ -49,9 +49,6 @@ function proxy(ctx, opts) {
       .then(res => {
         const { body } = res;
         console.log({body, res})
-
-        setResCookies(ctx, headers);
-
         return body;
       })
       .catch(err => {
