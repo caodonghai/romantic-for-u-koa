@@ -35,7 +35,7 @@ router.get("/rap2api/getLoveKnotData", async (ctx) => {
 
 // 首页
 router.get("/api/getLoveKnotData", async (ctx) => {
-  var res = await koa2Req("http://www.baidu.com");
+  var res = await koaRequest("http://www.baidu.com");
   ctx.body = res.body;
 });
 
