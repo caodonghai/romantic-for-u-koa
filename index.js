@@ -1,19 +1,16 @@
 const Koa = require("koa");
 const logger = require("koa-logger");
 const bodyParser = require("koa-bodyparser");
-const fs = require("fs");
-const path = require("path");
-const { init: initDB, Counter } = require("./db");
+const { init: initDB } = require("./db");
 const koaRequestProxy = require("./middleware/koaRequestProxy");
-const routers = require('./routers/index')
-const { log } = require("console");
+const routers = require("./routers/index");
 
 const app = new Koa();
 app
   .use(logger())
   .use(bodyParser())
-  .use(...routers.map(item => item.routes()))
-  .use(...routers.map(item => item.allowedMethods()))
+  .use(...routers.map((item) => item.routes()))
+  .use(...routers.map((item) => item.allowedMethods()))
   .use(
     koaRequestProxy({
       apiHost: "rap2api.taobao.org/app/mock/308003/GET", // 全局端口
