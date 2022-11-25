@@ -42,11 +42,16 @@ function proxy(ctx, opts) {
     if (qs.stringify(ctx.request.body)) {
       reqParams = { ...reqParams, data: qs.stringify(ctx.request.body) };
     }
+    
+    
+  
+    console.log({reqParams})
 
     delete reqParams.headers.host;
     return koaRequest(reqParams)
       .then(res => {
         const { data, headers } = res;
+        console.log({data, headers, res})
 
         setResCookies(ctx, headers);
 
