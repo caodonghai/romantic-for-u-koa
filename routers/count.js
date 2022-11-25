@@ -1,12 +1,12 @@
 const Router = require("koa-router");
-const controller = require("../controllers/count");
+const controllers = require("../controllers/count");
 
 const router = new Router();
 
 // 获取计数
-router.get("/api/count", controller.getCount);
+router.get("/api/count", controllers.getCount);
 
 // 更新计数
-router.post("/api/count", controller.updateCount);
+router.post("/api/count", controllers.updateCount);
 
 module.exports = router;

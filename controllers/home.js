@@ -11,7 +11,7 @@ console.log({ __dirname, homePage });
 /**
  * 获取文件
  */
-exports.getHomepage = async (ctx) => {
+exports.getHomePage = async (ctx) => {
   ctx.body = homePage;
 };
 
