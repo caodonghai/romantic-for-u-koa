@@ -34,19 +34,18 @@ router.get("/", async (ctx) => {
 //   ctx.body = result.body;
 // });
 
-router.use((ctx, next) => {
+router.use(async (ctx, next) => {
   // 使用
   let { url } = ctx;
-  if (url.startsWith('/rap2api')) {
+  if (url.startsWith("/rap2api")) {
     const data = await ctx.koaRequestProxy({
-      host: 'rap2api.taobao.org/app/mock/308003/GET' // 多代理，nest地址代理到localhost:3000
+      host: "rap2api.taobao.org/app/mock/308003/GET", // 多代理，nest地址代理到localhost:3000
     });
     // 这里可以做一些请求之后需要处理的事情
     ctx.body = data.body;
   }
-  await next()
-})
-
+  await next();
+});
 
 // 更新计数
 router.post("/api/count", async (ctx) => {
