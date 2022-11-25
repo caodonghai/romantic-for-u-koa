@@ -18,10 +18,9 @@ router.get("/", async (ctx) => {
 
 // 首页
 router.get("/rap2api/getLoveKnotData", async (ctx) => {
-  let res = await koaRequest({
-    url: "http://rap2api.taobao.org/app/mock/308003/GET/api/getLoveKnotData",
-    method: "get",
-  });
+  let res = await koaRequest(
+    "http://rap2api.taobao.org/app/mock/308003/GET/api/getLoveKnotData"
+  );
   ctx.body = res;
 });
 
