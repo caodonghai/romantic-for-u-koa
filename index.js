@@ -7,6 +7,7 @@ const path = require("path");
 const koaRequest = require("koa2-request");
 const { init: initDB, Counter } = require("./db");
 const koaRequestProxy = require("./middleware/koaRequestProxy");
+const { log } = require("console");
 
 const router = new Router();
 
@@ -37,6 +38,7 @@ router.get("/", async (ctx) => {
 router.use(async (ctx, next) => {
   // 使用
   let { url } = ctx;
+  console.log({ url });
   if (url.startsWith("/rap2api")) {
     const data = await ctx.koaRequestProxy({
       host: "rap2api.taobao.org/app/mock/308003/GET", // 多代理，nest地址代理到localhost:3000

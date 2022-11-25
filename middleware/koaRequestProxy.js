@@ -33,7 +33,7 @@ module.exports = (opts = {}) => {
 function proxy(ctx, opts) {
   ctx.koaRequestProxy = (params = {}) => {
     params = Object.assign({}, { host: opts.apiHost || '' }, params);
-
+    console.log({params})
     let reqParams = Object.assign({}, params, formatReqParams(ctx, params));
     if (reqParams.method.toUpperCase() !== 'GET') {
       reqParams.data = params.data || ctx.request.body;
