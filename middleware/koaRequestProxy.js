@@ -42,8 +42,6 @@ function proxy(ctx, opts) {
     if (qs.stringify(ctx.request.body)) {
       reqParams = { ...reqParams, data: qs.stringify(ctx.request.body) };
     }
-    
-    
   
     console.log({reqParams})
 
@@ -88,7 +86,7 @@ function formatReqParams(ctx, params) {
   let { url, method, headers } = ctx;
   const { host } = params;
 
-  url = params.url || url;
+  url = (params.url || url).replace('/rap2api', '/api');
   method = params.method || method;
 
   url = `http://${host}${url}`;
