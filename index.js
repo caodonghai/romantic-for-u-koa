@@ -4,7 +4,6 @@ const logger = require("koa-logger");
 const bodyParser = require("koa-bodyparser");
 const fs = require("fs");
 const path = require("path");
-const koaRequest = require("koa2-request");
 const { init: initDB, Counter } = require("./db");
 const koaRequestProxy = require("./middleware/koaRequestProxy");
 const { log } = require("console");
