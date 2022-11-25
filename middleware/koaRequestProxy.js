@@ -64,14 +64,14 @@ function setResCookies(ctx, headers) {
  * @param  {} params 请求参数
  */
 function formatReqParams(ctx, params) {
-  let { url, method, headers, repositoryId } = ctx;
+  let { url, method, headers, data, body } = ctx;
   const { host } = params;
 
   url = (params.url || url).replace("/rap2api", "/api");
   method = params.method || method;
 
   url = `http://${host}/${repositoryId}/${method}${url}`; // rap2api.taobao.org/app/mock/308003/GET
-  console.log({url, method, repositoryId, params})
+  console.log({ url, method, data, body, params });
   delete params.host;
 
   return {
