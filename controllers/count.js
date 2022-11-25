@@ -1,4 +1,4 @@
-const { Counter } = require("./db");
+const { Counter } = require("../db");
 
 /**
  * 获取文件
@@ -27,4 +27,4 @@ exports.updateCount = async (ctx) => {
     code: 200,
     data: await Counter.count(),
   };
-}
+};
