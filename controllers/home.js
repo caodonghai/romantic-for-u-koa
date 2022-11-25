@@ -6,8 +6,6 @@ const homePage = fs.readFileSync(
   "utf-8"
 );
 
-console.log({ __dirname, homePage });
-
 /**
  * 获取文件
  */
