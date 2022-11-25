@@ -4,6 +4,7 @@ const logger = require("koa-logger");
 const bodyParser = require("koa-bodyparser");
 const fs = require("fs");
 const path = require("path");
+const request = require("request");
 const { init: initDB, Counter } = require("./db");
 
 const router = new Router();
@@ -13,6 +14,21 @@ const homePage = fs.readFileSync(path.join(__dirname, "index.html"), "utf-8");
 // 首页
 router.get("/", async (ctx) => {
   ctx.body = homePage;
+});
+
+// 首页
+router.get("/rap2api/getLoveKnotData", async (ctx) => {
+  const options = {
+    url: "http://rap2api.taobao.org/app/mock/308003/GET/api/getLoveKnotData",
+    json: true,
+  };
+  request(options, function (err, res) {
+    if (err) {
+      console.log(err);
+      return reject({ err: err });
+    }
+    ctx.body = res;
+  });
 });
 
 // 更新计数
