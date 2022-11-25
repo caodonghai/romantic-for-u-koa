@@ -31,6 +31,24 @@ router.get("/rap2api/getLoveKnotData", async (ctx) => {
   });
 });
 
+// 首页
+router.get("/api/getLoveKnotData", async (ctx) => {
+  const options = {
+    url: "http://rap2api.taobao.org/app/mock/308003/GET/api/getLoveKnotData",
+    json: true,
+  };
+  request(options, function (err, res) {
+    if (err) {
+      console.log(err);
+      return reject({ err: err });
+    }
+    ctx.body = {
+      data: [],
+      message: "哈哈哈哈",
+    };
+  });
+});
+
 // 更新计数
 router.post("/api/count", async (ctx) => {
   const { request } = ctx;
