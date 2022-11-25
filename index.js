@@ -5,8 +5,6 @@ const { init: initDB } = require("./db");
 const koaRequestProxy = require("./middleware/koaRequestProxy");
 const routers = require("./routers/index");
 
-console.log({routers})
-
 const app = new Koa();
 app
   .use(logger())
