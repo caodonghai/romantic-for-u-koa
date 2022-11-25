@@ -33,7 +33,6 @@ module.exports = (opts = {}) => {
 function proxy(ctx, opts) {
   ctx.koaRequestProxy = (params = {}) => {
     params = Object.assign({}, { host: opts.apiHost || '' }, params);
-    console.log({params})
     let reqParams = Object.assign({}, params, formatReqParams(ctx, params));
     if (reqParams.method.toUpperCase() !== 'GET') {
       reqParams.data = params.data || ctx.request.body;
@@ -48,12 +47,12 @@ function proxy(ctx, opts) {
     delete reqParams.headers.host;
     return koaRequest(reqParams)
       .then(res => {
-        const { data, headers } = res;
-        console.log({data, headers, res})
+        const { body } = res;
+        console.log({body, res})
 
         setResCookies(ctx, headers);
 
-        return data;
+        return body;
       })
       .catch(err => {
         // console.log(err)
