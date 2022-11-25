@@ -4,7 +4,7 @@ const logger = require("koa-logger");
 const bodyParser = require("koa-bodyparser");
 const fs = require("fs");
 const path = require("path");
-const request = require("request");
+const koaRequest = require("koa2-request");
 const { init: initDB, Counter } = require("./db");
 
 const router = new Router();
@@ -18,17 +18,11 @@ router.get("/", async (ctx) => {
 
 // 首页
 router.get("/rap2api/getLoveKnotData", async (ctx) => {
-  const options = {
+  let res = await koaRequest({
     url: "http://rap2api.taobao.org/app/mock/308003/GET/api/getLoveKnotData",
-    json: true,
-  };
-  request.get(options, function (err, res) {
-    if (err) {
-      console.log(err);
-      return reject({ err: err });
-    }
-    ctx.body = res;
+    method: "get",
   });
+  ctx.body = res;
 });
 
 // 首页
