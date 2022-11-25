@@ -71,6 +71,7 @@ function formatReqParams(ctx, params) {
   method = params.method || method;
 
   url = `http://${host}/${repositoryId}/${method}${url}`; // rap2api.taobao.org/app/mock/308003/GET
+  console.log({url, method, repositoryId, params})
   delete params.host;
 
   return {
