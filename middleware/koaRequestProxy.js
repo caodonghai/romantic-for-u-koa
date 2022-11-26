@@ -18,7 +18,6 @@ module.exports = () => {
     }
 
     return await next();
-    // return next();
   };
 };
 
@@ -42,54 +41,6 @@ function requestProxy(params = {}, ctx) {
       // console.log(err)
       return err;
     });
-}
-
-function proxy(ctx, opts) {
-  ctx.koaRequestProxy = (params = {}) => {
-    params = Object.assign({}, { host: opts.apiHost || "" }, params);
-    let reqParams = Object.assign({}, params, formatReqParams(ctx, params));
-    if (reqParams.method.toUpperCase() !== "GET") {
-      reqParams.data = params.data || ctx.request.body;
-    }
-    // application/x-www-form-urlencoded形式转发参数乱码修改
-    if (qs.stringify(ctx.request.body)) {
-      reqParams = { ...reqParams, data: qs.stringify(ctx.request.body) };
-    }
-
-    delete reqParams.headers.host;
-    return koaRequest(reqParams)
-      .then((res) => {
-        const { body } = res;
-        return body;
-      })
-      .catch((err) => {
-        // console.log(err)
-        return err;
-      });
-  };
-}
-function setResCookies(ctx, headers) {
-  const resCookies = headers["set-cookie"];
-
-  if (
-    !headers ||
-    !resCookies ||
-    !resCookies.length ||
-    resCookies.length <= 0 ||
-    !resCookies[0]
-  ) {
-    return;
-  }
-
-  ctx.res._headers = ctx.res._headers || {};
-  ctx.res._headerNames = ctx.res._headerNames || {};
-
-  ctx.res._headers["set-cookie"] = ctx.res._headers["set-cookie"] || [];
-  ctx.res._headers["set-cookie"] =
-    ctx.res._headers["set-cookie"].concat &&
-    ctx.res._headers["set-cookie"].concat(resCookies);
-
-  ctx.res._headerNames["set-cookie"] = "set-cookie";
 }
 
 /**
