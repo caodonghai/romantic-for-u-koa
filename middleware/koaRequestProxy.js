@@ -22,7 +22,7 @@ module.exports = () => {
   };
 };
 
-function requestProxy(params = {}) {
+function requestProxy(params = {}, ctx) {
   let reqParams = Object.assign({}, params, formatReqParams(ctx, params));
   if (reqParams.method.toUpperCase() !== "GET") {
     reqParams.data = params.data || ctx.request.body;
