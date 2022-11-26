@@ -1,14 +1,45 @@
 const koaRequest = require("koa2-request");
 const qs = require("qs");
 
-module.exports = (opts = {}) => {
+module.exports = () => {
   return (ctx, next) => {
-    if (!ctx.koaRequestProxy) {
-      proxy(ctx, opts);
+    // 使用
+    let { url } = ctx;
+    if (url.startsWith("/rap2api")) {
+      const data = await requestProxy({
+        host: "rap2api.taobao.org/app/mock/308003", // 多代理，nest地址代理到localhost:3000
+      });
+      // 这里可以做一些请求之后需要处理的事情
+      ctx.body = data;
+      console.log({ url, data });
     }
-
-    return next();
+    
+    await next();
+    // return next();
   };
+};
+
+function requestProxy (params = {}) {
+  params = Object.assign({}, { host: opts.apiHost || "" }, params);
+  let reqParams = Object.assign({}, params, formatReqParams(ctx, params));
+  if (reqParams.method.toUpperCase() !== "GET") {
+    reqParams.data = params.data || ctx.request.body;
+  }
+  // application/x-www-form-urlencoded形式转发参数乱码修改
+  if (qs.stringify(ctx.request.body)) {
+    reqParams = { ...reqParams, data: qs.stringify(ctx.request.body) };
+  }
+
+  delete reqParams.headers.host;
+  return koaRequest(reqParams)
+    .then((res) => {
+      const { body } = res;
+      return body;
+    })
+    .catch((err) => {
+      // console.log(err)
+      return err;
+    });
 };
 
 function proxy(ctx, opts) {
