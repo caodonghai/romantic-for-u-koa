@@ -2,7 +2,7 @@ const koaRequest = require("koa2-request");
 const qs = require("qs");
 
 module.exports = () => {
-  return (ctx, next) => {
+  return async (ctx, next) => {
     // 使用
     let { url } = ctx;
     if (url.startsWith("/rap2api")) {
@@ -13,13 +13,13 @@ module.exports = () => {
       ctx.body = data;
       console.log({ url, data });
     }
-    
+
     await next();
     // return next();
   };
 };
 
-function requestProxy (params = {}) {
+function requestProxy(params = {}) {
   params = Object.assign({}, { host: opts.apiHost || "" }, params);
   let reqParams = Object.assign({}, params, formatReqParams(ctx, params));
   if (reqParams.method.toUpperCase() !== "GET") {
@@ -40,7 +40,7 @@ function requestProxy (params = {}) {
       // console.log(err)
       return err;
     });
-};
+}
 
 function proxy(ctx, opts) {
   ctx.koaRequestProxy = (params = {}) => {
