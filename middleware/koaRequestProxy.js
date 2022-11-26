@@ -14,14 +14,14 @@ module.exports = () => {
       );
       // 这里可以做一些请求之后需要处理的事情
       ctx.body = data;
-      console.log({ url, data });
+      // console.log({ url, data });
     }
 
     return await next();
   };
 };
 
-function requestProxy(params = {}, ctx) {
+async function requestProxy(params = {}, ctx) {
   let reqParams = Object.assign({}, params, formatReqParams(ctx, params));
   if (reqParams.method.toUpperCase() !== "GET") {
     reqParams.data = params.data || ctx.request.body;
@@ -55,7 +55,7 @@ function formatReqParams(ctx, params) {
   method = params.method || method;
 
   url = `http://${host}/${method}${url}`; // rap2api.taobao.org/app/mock/308003/GET
-  console.log({ url, method, params });
+  // console.log({ url, method, params });
   delete params.host;
 
   return {
