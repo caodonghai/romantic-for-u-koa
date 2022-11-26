@@ -6,9 +6,12 @@ module.exports = () => {
     // 使用
     let { url } = ctx;
     if (url.startsWith("/rap2api")) {
-      const data = await requestProxy({
-        host: "rap2api.taobao.org/app/mock/308003", // 多代理，nest地址代理到localhost:3000
-      });
+      const data = await requestProxy(
+        {
+          host: "rap2api.taobao.org/app/mock/308003", // 多代理，nest地址代理到localhost:3000
+        },
+        ctx
+      );
       // 这里可以做一些请求之后需要处理的事情
       ctx.body = data;
       console.log({ url, data });
