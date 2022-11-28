@@ -1,4 +1,4 @@
-const { WishList, User } = require("../db");
+const { WishList } = require("../db");
 
 /**
  * 获取文件
@@ -9,18 +9,6 @@ exports.wishList = async (ctx) => {
   ctx.body = {
     code: 200,
     data: result,
-  };
-};
-
-exports.createUser = async (ctx) => {
-  const { request } = ctx;
-  const { firstName } = request.body;
-
-  await User.create({ firstName });
-
-  ctx.body = {
-    code: 200,
-    data: true,
   };
 };
 

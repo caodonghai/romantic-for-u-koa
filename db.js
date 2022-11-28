@@ -22,19 +22,28 @@ const Counter = sequelize.define("Counter", {
 
 const User = sequelize.define("User", {
   // 在这里定义模型属性
-  firstName: {
+  userName: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  lastName: {
+  photo: {
     type: DataTypes.STRING,
+  },
+  birthday: {
+    type: DataTypes.DATEONLY,
+  },
+  meetTime: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
+  navigateTo: {
+    type: DataTypes.STRING,
+    allowNull: false,
   },
 });
 
 // 定义愿望清单数据模型
 const WishList = sequelize.define("WishList", {
-  // createdAt: "createTime",
-  // updatedAt: "updateTime",
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -53,6 +62,7 @@ const WishList = sequelize.define("WishList", {
   },
   plannedTime: {
     type: DataTypes.DATEONLY,
+    allowNull: false,
   },
   // 实例化将自动将 flag 设置为 true (如果未设置)
   flag: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
@@ -60,9 +70,9 @@ const WishList = sequelize.define("WishList", {
 
 // 数据库初始化方法
 async function init() {
-  await Counter.sync({ force: true });
-  await WishList.sync({ force: true });
-  await User.sync({ force: true });
+  await Counter.sync({ alter: true });
+  await WishList.sync({ alter: true });
+  await User.sync({ alter: true });
 }
 
 // 导出初始化方法和模型
