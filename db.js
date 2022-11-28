@@ -21,7 +21,7 @@ const Counter = sequelize.define("Counter", {
 });
 
 // 定义愿望清单数据模型
-const Wish = sequelize.define("Counter", {
+const Wish = sequelize.define("Wish", {
   createdAt: "createTime",
   updatedAt: "updateTime",
   id: {

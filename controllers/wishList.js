@@ -98,8 +98,6 @@ exports.deleteWish = async (ctx) => {
 
 exports.wishDetail = async (ctx) => {
   const id = ctx.session.id;
-  const { request } = ctx;
-  const { type } = request.body;
   const current = Wish.findAll({
     where: {
       id,
@@ -108,6 +106,6 @@ exports.wishDetail = async (ctx) => {
 
   ctx.body = {
     code: 200,
-    data: wishDetail,
+    data: current,
   };
 };
