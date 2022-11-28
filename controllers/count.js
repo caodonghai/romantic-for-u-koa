@@ -4,10 +4,10 @@ const { Counter } = require("../db");
  * 获取文件
  */
 exports.getCount = async (ctx) => {
-  console.log({ctx})
+  console.log({ ctx });
   const result = await Counter.count();
 
-  console.log({ctx, result})
+  console.log({ ctx, result });
   ctx.body = {
     code: 200,
     data: result,
