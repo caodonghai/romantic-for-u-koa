@@ -8,6 +8,7 @@ router.get("/api/wishList", controllers.wishList);
 
 // 创建愿望
 router.get("/api/createWish", controllers.createWish);
+router.get("/api/createUser", controllers.createUser);
 
 // 更新愿望
 router.post("/api/updateWish", controllers.updateWish);

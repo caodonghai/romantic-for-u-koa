@@ -20,6 +20,17 @@ const Counter = sequelize.define("Counter", {
   },
 });
 
+const User = sequelize.define("User", {
+  // 在这里定义模型属性
+  firstName: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  lastName: {
+    type: DataTypes.STRING,
+  },
+});
+
 // 定义愿望清单数据模型
 const WishList = sequelize.define("WishList", {
   createdAt: "createTime",
@@ -29,11 +40,11 @@ const WishList = sequelize.define("WishList", {
     autoIncrement: true,
     primaryKey: true,
   },
-  title: {
+  wishTitle: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  desc: {
+  wishDesc: {
     type: DataTypes.TEXT,
   },
   useName: {
@@ -52,6 +63,7 @@ const WishList = sequelize.define("WishList", {
 async function init() {
   await Counter.sync({ alter: true });
   await WishList.sync({ alter: true });
+  await User.sync({ alter: true });
 }
 
 // 导出初始化方法和模型
@@ -59,4 +71,5 @@ module.exports = {
   init,
   Counter,
   WishList,
+  User
 };
