@@ -20,13 +20,43 @@ const Counter = sequelize.define("Counter", {
   },
 });
 
+// 定义愿望清单数据模型
+const Wish = sequelize.define("Counter", {
+  createdAt: "createTime",
+  updatedAt: "updateTime",
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+  },
+  title: {
+    type: DataTypes.VARCHAR,
+    allowNull: false,
+  },
+  desc: {
+    type: DataTypes.TEXT,
+  },
+  useName: {
+    type: DataTypes.VARCHAR,
+    allowNull: false,
+  },
+  plannedTime: {
+    type: DataTypes.DATETIME,
+    allowNull: false,
+  },
+  // 实例化将自动将 flag 设置为 true (如果未设置)
+  flag: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
+});
+
 // 数据库初始化方法
 async function init() {
   await Counter.sync({ alter: true });
+  await Wish.sync({ alter: true });
 }
 
 // 导出初始化方法和模型
 module.exports = {
   init,
   Counter,
+  Wish,
 };
