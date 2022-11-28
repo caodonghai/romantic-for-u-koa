@@ -21,7 +21,7 @@ const Counter = sequelize.define("Counter", {
 });
 
 // 定义愿望清单数据模型
-const Wish = sequelize.define("Wish", {
+const WishList = sequelize.define("WishList", {
   createdAt: "createTime",
   updatedAt: "updateTime",
   id: {
@@ -51,12 +51,12 @@ const Wish = sequelize.define("Wish", {
 // 数据库初始化方法
 async function init() {
   await Counter.sync({ alter: true });
-  await Wish.sync({ alter: true });
+  await WishList.sync({ alter: true });
 }
 
 // 导出初始化方法和模型
 module.exports = {
   init,
   Counter,
-  Wish,
+  WishList,
 };
