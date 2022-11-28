@@ -30,18 +30,18 @@ const Wish = sequelize.define("Wish", {
     primaryKey: true,
   },
   title: {
-    type: DataTypes.VARCHAR,
+    type: DataTypes.STRING,
     allowNull: false,
   },
   desc: {
     type: DataTypes.TEXT,
   },
   useName: {
-    type: DataTypes.VARCHAR,
+    type: DataTypes.STRING,
     allowNull: false,
   },
   plannedTime: {
-    type: DataTypes.DATETIME,
+    type: DataTypes.DATEONLY,
     allowNull: false,
   },
   // 实例化将自动将 flag 设置为 true (如果未设置)
