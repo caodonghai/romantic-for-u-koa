@@ -71,8 +71,8 @@ const WishList = sequelize.define("WishList", {
 // 数据库初始化方法
 async function init() {
   await Counter.sync({ alter: true });
-  await WishList.sync({ alter: true });
-  await User.sync({ alter: true });
+  // await WishList.sync({ alter: true });
+  // await User.sync({ alter: true });
 }
 
 // 导出初始化方法和模型
