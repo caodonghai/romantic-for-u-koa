@@ -7,7 +7,7 @@ const router = new Router();
 router.get("/api/wishList", controllers.wishList);
 
 // 创建愿望
-router.get("/api/createWish", controllers.createWish);
+router.post("/api/createWish", controllers.createWish);
 
 // 更新愿望
 router.post("/api/updateWish", controllers.updateWish);
