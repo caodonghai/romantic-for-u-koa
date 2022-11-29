@@ -14,11 +14,21 @@ exports.wishList = async (ctx) => {
 
 exports.createWish = async (ctx) => {
   const { request } = ctx;
-  const { body, data } = request;
-  console.log("---------------", { request, body, data });
-  const { wishTitle, wishDesc, useName, plannedTime } = request.body;
+  const { body } = request;
+  console.log("---------------", { request, body });
+  const { wishTitle, wishDesc, useName, plannedTime, createdAt, updatedAt } =
+    request.body;
 
-  await WishList.create({ wishTitle, wishDesc, useName, plannedTime });
+  const result = await WishList.create({
+    wishTitle,
+    wishDesc,
+    useName,
+    plannedTime,
+    createdAt,
+    updatedAt,
+  });
+
+  console.log({ result });
 
   ctx.body = {
     code: 200,
