@@ -13,8 +13,8 @@ exports.wishList = async (ctx) => {
 };
 
 exports.wishListById = async (ctx) => {
-  const { params } = ctx;
-  const { id = "" } = params;
+  let req_query = ctx.request.query;
+  let id = req_query.id;
   const result = await WishList.findAll({
     where: {
       id,
