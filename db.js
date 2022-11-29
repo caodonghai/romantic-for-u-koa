@@ -27,6 +27,11 @@ const Counter = sequelize.define("Counter", {
 
 const User = sequelize.define("User", {
   // 在这里定义模型属性
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+  },
   userName: {
     type: DataTypes.STRING,
     allowNull: false,

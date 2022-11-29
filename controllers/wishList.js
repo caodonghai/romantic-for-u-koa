@@ -12,14 +12,45 @@ exports.wishList = async (ctx) => {
   };
 };
 
+exports.wishListById = async (ctx) => {
+  const { request } = ctx;
+  const { id = "" } = request.body;
+  const result = WishList.findAll({
+    where: {
+      id,
+    },
+  });
+
+  ctx.body = {
+    code: 200,
+    data: result,
+  };
+};
+
+exports.wishListByUserName = async (ctx) => {
+  const { request } = ctx;
+  const { useName = "" } = request.body;
+  console.log({useName, request});
+  const result = WishList.findAll({
+    where: {
+      useName,
+    },
+  });
+
+  ctx.body = {
+    code: 200,
+    data: result,
+  };
+};
+
 exports.createWish = async (ctx) => {
   const { request } = ctx;
-  const { body } = request;
-  console.log("---------------", { request, body });
-  const { wishTitle, wishDesc, useName, plannedTime, createdAt, updatedAt } =
-    request.body;
+  const { body = {} } = request;
 
-  const result = await WishList.create({
+  const { wishTitle, wishDesc, useName, plannedTime, createdAt, updatedAt } =
+    body;
+
+  await WishList.create({
     wishTitle,
     wishDesc,
     useName,
@@ -27,8 +58,6 @@ exports.createWish = async (ctx) => {
     createdAt,
     updatedAt,
   });
-
-  console.log({ result });
 
   ctx.body = {
     code: 200,

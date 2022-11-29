@@ -6,6 +6,10 @@ const router = new Router();
 // 获取愿望列表
 router.get("/api/wishList", controllers.wishList);
 
+router.get("/api/wishListById", controllers.wishListById);
+
+router.get("/api/wishListByUserName", controllers.wishListByUserName);
+
 // 创建愿望
 router.post("/api/createWish", controllers.createWish);
 
