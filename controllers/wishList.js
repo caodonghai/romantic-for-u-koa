@@ -36,6 +36,7 @@ exports.wishListByUserName = async (ctx) => {
       userName: userName,
     },
   });
+  console.log({ userName, result });
 
   ctx.body = {
     code: 200,
