@@ -30,7 +30,7 @@ exports.wishListById = async (ctx) => {
 exports.wishListByUserName = async (ctx) => {
   const { params } = ctx;
   const { useName = "" } = params;
-  console.log({useName, params});
+  console.log({ useName, params, ctx });
   const result = WishList.findAll({
     where: {
       useName,
