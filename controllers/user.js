@@ -1,8 +1,5 @@
 const { User } = require("../db");
 
-/**
- * 获取文件
- */
 exports.getUserList = async (ctx) => {
   const result = await User.findAndCountAll();
 
@@ -10,4 +7,29 @@ exports.getUserList = async (ctx) => {
     code: 200,
     data: result,
   };
+};
+
+exports.loginWithUserName = async (ctx) => {
+  let req_query = ctx.request.query;
+  let userName = req_query.userName;
+  const result = await WishList.findOne({
+    where: {
+      userName: userName,
+    },
+  });
+  
+  console.log({result})
+
+  if (result && Object.keys(result).length) {
+    ctx.body = {
+      code: 200,
+      data: result,
+    };
+  } else {
+    ctx.body = {
+      code: 502,
+      errMsg: "用户不存在",
+      data: {},
+    };
+  }
 };
