@@ -14,7 +14,7 @@ exports.wishList = async (ctx) => {
 
 exports.createWish = async (ctx) => {
   const { request } = ctx;
-  console.log('createWish', {ctx})
+  console.log("---------------", { request, body, data });
   const { wishTitle, wishDesc, useName, plannedTime } = request.body;
 
   await WishList.create({ wishTitle, wishDesc, useName, plannedTime });
