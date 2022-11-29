@@ -84,6 +84,6 @@ async function init() {
 module.exports = {
   init,
   Counter,
-  // WishList,
-  // User,
+  WishList,
+  User,
 };
