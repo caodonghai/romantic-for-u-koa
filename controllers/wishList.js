@@ -30,11 +30,11 @@ exports.wishListById = async (ctx) => {
 exports.wishListByUserName = async (ctx) => {
   let req_query = ctx.request.query;
   let req_queryString = ctx.request.querystring;
-  let useName = req_query.useName;
-  console.log({ useName, req_query, req_queryString });
+  let userName = req_query.userName;
+  console.log({ userName, req_query, req_queryString });
   const result = WishList.findAll({
     where: {
-      useName,
+      userName,
     },
   });
 
@@ -48,13 +48,13 @@ exports.createWish = async (ctx) => {
   const { request } = ctx;
   const { body = {} } = request;
 
-  const { wishTitle, wishDesc, useName, plannedTime, createdAt, updatedAt } =
+  const { wishTitle, wishDesc, userName, plannedTime, createdAt, updatedAt } =
     body;
 
   await WishList.create({
     wishTitle,
     wishDesc,
-    useName,
+    userName,
     plannedTime,
     createdAt,
     updatedAt,
@@ -69,14 +69,14 @@ exports.createWish = async (ctx) => {
 exports.updateWish = async (ctx) => {
   const id = ctx.session.id;
   const { request } = ctx;
-  const { wishTitle, wishDesc, useName, plannedTime } = request.body;
+  const { wishTitle, wishDesc, userName, plannedTime } = request.body;
   const current = WishList.findAll({
     where: {
       id,
     },
   });
 
-  await current.update({ wishTitle, wishDesc, useName, plannedTime });
+  await current.update({ wishTitle, wishDesc, userName, plannedTime });
 
   ctx.body = {
     code: 200,

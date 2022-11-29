@@ -66,7 +66,7 @@ const WishList = sequelize.define("WishList", {
   wishDesc: {
     type: DataTypes.TEXT,
   },
-  useName: {
+  userName: {
     type: DataTypes.STRING,
     allowNull: false,
   },
