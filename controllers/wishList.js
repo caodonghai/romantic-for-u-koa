@@ -30,13 +30,11 @@ exports.wishListById = async (ctx) => {
 exports.wishListByUserName = async (ctx) => {
   let req_query = ctx.request.query;
   let userName = req_query.userName;
-  console.log({ userName, req_query });
   const result = await WishList.findAll({
     where: {
       userName: userName,
     },
   });
-  console.log({ userName, result });
 
   ctx.body = {
     code: 200,
