@@ -41,17 +41,15 @@ exports.wishListByUserName = async (ctx) => {
 exports.createWish = async (ctx) => {
   const { request } = ctx;
   const { body = {} } = request;
+  console.log({request, body})
 
-  const { wishTitle, wishDesc, userName, plannedTime, createdAt, updatedAt } =
-    body;
+  const { wishTitle, wishDesc, userName, plannedTime } = body;
 
   await WishList.create({
     wishTitle,
     wishDesc,
     userName,
     plannedTime,
-    createdAt,
-    updatedAt,
   });
 
   ctx.body = {
