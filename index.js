@@ -20,7 +20,7 @@ app
   .use(count.routes())
   .use(count.allowedMethods())
   .use(wishList.routes())
-  .use(wishList.allowedMethods())
+  // .use(wishList.allowedMethods())
   .use(user.routes())
   .use(user.allowedMethods());
 
