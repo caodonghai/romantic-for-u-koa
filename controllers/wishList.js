@@ -28,8 +28,8 @@ exports.wishListById = async (ctx) => {
 };
 
 exports.wishListByUserName = async (ctx) => {
-  let req_query = request.query;
-  let req_queryString = request.querystring;
+  let req_query = ctx.request.query;
+  let req_queryString = ctx.request.querystring;
   let useName = req_query.useName;
   console.log({ useName, req_query, req_queryString });
   const result = WishList.findAll({
