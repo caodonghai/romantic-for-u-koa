@@ -12,13 +12,13 @@ exports.getUserList = async (ctx) => {
 exports.loginWithUserName = async (ctx) => {
   let req_query = ctx.request.query;
   let userName = req_query.userName;
-  const result = await WishList.findOne({
+  const result = await User.findOne({
     where: {
       userName: userName,
     },
   });
-  
-  console.log({result})
+
+  console.log({ result });
 
   if (result && Object.keys(result).length) {
     ctx.body = {
