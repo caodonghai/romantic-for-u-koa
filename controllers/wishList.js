@@ -15,11 +15,7 @@ exports.wishList = async (ctx) => {
 exports.wishListById = async (ctx) => {
   let req_query = ctx.request.query;
   let id = req_query.id;
-  const result = await WishList.findAll({
-    where: {
-      id,
-    },
-  });
+  const result = await WishList.findByPk(id);
 
   ctx.body = {
     code: 200,
@@ -30,7 +26,7 @@ exports.wishListById = async (ctx) => {
 exports.wishListByUserName = async (ctx) => {
   let req_query = ctx.request.query;
   let userName = req_query.userName;
-  const result = await WishList.findAll({
+  const result = await WishList.findAndCountAll({
     where: {
       userName: userName,
     },
