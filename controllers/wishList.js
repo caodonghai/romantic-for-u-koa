@@ -13,8 +13,8 @@ exports.wishList = async (ctx) => {
 };
 
 exports.wishListById = async (ctx) => {
-  const { request } = ctx;
-  const { id = "" } = request.body;
+  const { params } = ctx;
+  const { id = "" } = params;
   const result = WishList.findAll({
     where: {
       id,
@@ -28,9 +28,9 @@ exports.wishListById = async (ctx) => {
 };
 
 exports.wishListByUserName = async (ctx) => {
-  const { request } = ctx;
-  const { useName = "" } = request.body;
-  console.log({useName, request});
+  const { params } = ctx;
+  const { useName = "" } = params;
+  console.log({useName, params});
   const result = WishList.findAll({
     where: {
       useName,
