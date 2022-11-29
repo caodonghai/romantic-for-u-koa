@@ -17,7 +17,7 @@ module.exports = () => {
       // console.log({ url, data });
     }
 
-    return await next();
+    await next();
   };
 };
 
