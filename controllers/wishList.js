@@ -75,17 +75,12 @@ exports.updateWish = async (ctx) => {
 };
 
 exports.completeWish = async (ctx) => {
-  const { request } = ctx;
-  let req_query = request.query;
-  let id = req_query.id;
-  const { type } = request.body;
-  const current = await WishList.findAll({
-    where: {
-      id,
-    },
-  });
+  const { request, params } = ctx;
+  let id = params.id;
+  console.log({ request, params });
+  const current = await WishList.findByPk(id);
 
-  await current.update({ type });
+  await current.update({ type: 1 });
 
   ctx.body = {
     code: 200,
@@ -114,7 +109,6 @@ exports.deleteWish = async (ctx) => {
 exports.wishDetail = async (ctx) => {
   const { params } = ctx;
   let id = params.id;
-  console.log({ params });
   const current = await WishList.findByPk(id);
 
   ctx.body = {
