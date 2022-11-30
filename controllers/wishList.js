@@ -60,9 +60,9 @@ exports.createWish = async (ctx) => {
 
 exports.updateWish = async (ctx) => {
   const { request } = ctx;
-  let req_query = request.query;
-  let id = req_query.id;
-  console.log({ request, req_query }, request.body);
+  const { params } = ctx;
+  let id = params.id;
+  console.log({params, request})
   const { wishTitle, wishDesc, userName, plannedTime } = request.body;
   const current = await WishList.findByPk(id);
 
@@ -90,7 +90,7 @@ exports.completeWish = async (ctx) => {
 exports.deleteWish = async (ctx) => {
   const { params } = ctx;
   let id = params.id;
-  console.log({params, ctx})
+  console.log({ params, ctx });
   const current = await WishList.findByPk(id);
 
   await current.destroy();
