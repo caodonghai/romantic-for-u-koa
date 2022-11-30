@@ -75,9 +75,8 @@ exports.updateWish = async (ctx) => {
 };
 
 exports.completeWish = async (ctx) => {
-  const { request, params } = ctx;
+  const { params } = ctx;
   let id = params.id;
-  console.log({ request, params });
   const current = await WishList.findByPk(id);
 
   await current.update({ flag: 1 });
@@ -89,14 +88,9 @@ exports.completeWish = async (ctx) => {
 };
 
 exports.deleteWish = async (ctx) => {
-  const { request } = ctx;
-  let req_query = request.query;
-  let id = req_query.id;
-  const current = await WishList.findAll({
-    where: {
-      id,
-    },
-  });
+  const { params } = ctx;
+  let id = params.id;
+  const current = await WishList.findByPk(id);
 
   await current.destroy();
 
