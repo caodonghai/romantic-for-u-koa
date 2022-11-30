@@ -23,6 +23,6 @@ router.post("/api/completeWish", controllers.completeWish);
 router.post("/api/deleteWish", controllers.deleteWish);
 
 // 获取愿望详情
-router.post("/api/wish/:id", controllers.wishDetail);
+router.get("/api/wish/:id", controllers.wishDetail);
 
 module.exports = router;
