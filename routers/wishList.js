@@ -20,7 +20,7 @@ router.post("/api/updateWish", controllers.updateWish);
 router.post("/api/completeWish/:id", controllers.completeWish);
 
 // 删除愿望
-router.post("/api/deleteWish/:id", controllers.deleteWish);
+router.post("/api/:id/deleteWish", controllers.deleteWish);
 
 // 获取愿望详情
 router.get("/api/wish/:id", controllers.wishDetail);

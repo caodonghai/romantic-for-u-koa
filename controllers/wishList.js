@@ -90,6 +90,7 @@ exports.completeWish = async (ctx) => {
 exports.deleteWish = async (ctx) => {
   const { params } = ctx;
   let id = params.id;
+  console.log({params, ctx})
   const current = await WishList.findByPk(id);
 
   await current.destroy();
