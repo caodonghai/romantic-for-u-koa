@@ -62,12 +62,9 @@ exports.updateWish = async (ctx) => {
   const { request } = ctx;
   let req_query = request.query;
   let id = req_query.id;
+  console.log({request, req_query},request.body)
   const { wishTitle, wishDesc, userName, plannedTime } = request.body;
-  const current = await WishList.findAll({
-    where: {
-      id,
-    },
-  });
+  const current = await WishList.findByPk(id);
 
   await current.update({ wishTitle, wishDesc, userName, plannedTime });
 
