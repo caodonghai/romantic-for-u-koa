@@ -114,7 +114,7 @@ exports.deleteWish = async (ctx) => {
 exports.wishDetail = async (ctx) => {
   const { params } = ctx;
   let id = params.id;
-  console.log({ request, params });
+  console.log({ params });
   const current = await WishList.findByPk(id);
 
   ctx.body = {
