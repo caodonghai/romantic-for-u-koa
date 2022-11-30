@@ -80,7 +80,7 @@ exports.completeWish = async (ctx) => {
   console.log({ request, params });
   const current = await WishList.findByPk(id);
 
-  await current.update({ type: 1 });
+  await current.update({ flag: 1 });
 
   ctx.body = {
     code: 200,
