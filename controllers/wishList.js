@@ -3,8 +3,8 @@ const { WishList } = require("../db");
 /**
  * 获取文件
  */
-exports.wishList = async (ctx, res, next) => {
-  console.log("wishList", { ctx, res, next });
+exports.wishList = async (ctx, next) => {
+  console.log(JSON.stringify(ctx), "-------");
   const result = await WishList.findAndCountAll();
 
   ctx.body = {
