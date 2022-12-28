@@ -13,6 +13,10 @@ const sequelize = new Sequelize(
     host,
     port,
     dialect: "mysql" /* one of 'mysql' | 'mariadb' | 'postgres' | 'mssql' */,
+    dialectOptions: {
+      dateStrings: true,
+      typeCast: true
+    }
   }
 );
 
@@ -43,7 +47,7 @@ const User = sequelize.define("User", {
     type: DataTypes.DATEONLY,
   },
   meetTime: {
-    type: DataTypes.DATE(6),
+    type: DataTypes.DATE,
     allowNull: false,
   },
   navigateTo: {
