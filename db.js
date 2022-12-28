@@ -43,7 +43,7 @@ const User = sequelize.define("User", {
     type: DataTypes.DATEONLY,
   },
   meetTime: {
-    type: DataTypes.DATE,
+    type: DataTypes.DATE(6),
     allowNull: false,
   },
   navigateTo: {
