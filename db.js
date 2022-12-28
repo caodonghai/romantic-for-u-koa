@@ -54,6 +54,9 @@ const User = sequelize.define("User", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  music: {
+    type: DataTypes.STRING,
+  },
 });
 
 // 定义愿望清单数据模型
