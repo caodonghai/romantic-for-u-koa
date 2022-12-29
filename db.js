@@ -81,8 +81,8 @@ const WishList = sequelize.define("WishList", {
     type: DataTypes.DATEONLY,
     allowNull: false,
   },
-  // 实例化将自动将 flag 设置为 true (如果未设置)
-  flag: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
+  // 实例化将自动将 complete 设置为 false (如果未设置)
+  complete: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
 });
 
 // 数据库初始化方法

@@ -42,7 +42,6 @@ exports.wishListByUserName = async (ctx) => {
 exports.createWish = async (ctx) => {
   const { request } = ctx;
   const { body = {} } = request;
-  console.log({ request, body });
 
   const { wishTitle, wishDesc, userName, plannedTime } = body;
 
@@ -80,7 +79,7 @@ exports.completeWish = async (ctx) => {
   let id = params.id;
   const current = await WishList.findByPk(id);
 
-  await current.update({ flag: 1 });
+  await current.update({ complete: true });
 
   ctx.body = {
     code: 200,
@@ -91,7 +90,6 @@ exports.completeWish = async (ctx) => {
 exports.deleteWish = async (ctx) => {
   const { params } = ctx;
   let id = params.id;
-  console.log({ params, ctx });
   const current = await WishList.findByPk(id);
 
   await current.destroy();
