@@ -9,7 +9,9 @@ module.exports = () => {
     if(!userName) {
         ctx.body = {
             code: 302,
-            Locatioin: '/pages/login/index'
+            data: {
+                Locatioin: '/pages/login/index'
+            },
         };
         return
     } else if(!isLoginWithUserName(userName, ctx)) {
