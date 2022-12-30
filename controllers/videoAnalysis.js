@@ -8,14 +8,14 @@ exports.analysisVideoUrl = async (ctx) => {
             const url = decodeURIComponent(videoUrl)
             console.log({req_query, videoUrl, url})
             const { videoStream, share_title } = await runDouyin(url);
-            res.attachment(`${share_title}(无水印).mp4`);
-            videoStream.pipe(res);
+            ctx.attachment(`${share_title}(无水印).mp4`);
+            videoStream.pipe(ctx);
         } catch (e) {
             console.log(e);
-            res.send('错误: ' + e);
+            ctx.send('错误: ' + e);
         }
     } else {
-        res.send('视频链接错误');
+        ctx.send('视频链接错误');
     }
 };
 
