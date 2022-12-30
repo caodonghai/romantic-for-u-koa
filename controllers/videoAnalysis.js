@@ -5,11 +5,14 @@ exports.analysisVideoUrl = async (ctx) => {
     let req_query = ctx.request.query;
     let videoUrl = req_query.videoUrl;
     const url = decodeURIComponent(videoUrl)
-    const longUrl: any = await axios.get(url);
+    const longUrl = await koaRequest(url);
+    console.log({longUrl})
     const videoId = longUrl.request.path.substr(13, 19);
+    console.log({videoId})
     const api = `https://www.iesdouyin.com/web/api/v2/aweme/iteminfo/?item_ids=${videoId}`;
-    const res = await axios.get(api);
+    const res = await koaRequest(api);
     const { music, video, share_info } = res.data.item_list[0];
+    console.log({music, video, share_info})
     const mp3 = music.play_url.uri;
     const mp4 = video.play_addr.url_list[0].replace('playwm', 'play');
     const title = share_info.share_title;
