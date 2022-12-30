@@ -5,15 +5,13 @@ module.exports = () => {
     // 使用
     let { url, header } = ctx;
     const {userName, openId} = header;
-    const decodeUserName = decodeURIComponent(userName)
-    console.log({userName, decodeUserName, ctx})
-    if(!decodeUserName) {
+    if(!userName) {
         ctx.body = {
             code: 302,
             Locatioin: '/pages/login/index'
         };
     } else {
-        await isLoginWithUserName(decodeUserName, ctx)
+        await isLoginWithUserName(userName, ctx)
     }
 
     return await next();
@@ -21,9 +19,11 @@ module.exports = () => {
 };
 
 async function isLoginWithUserName(userName, ctx) {
+    const decodeUserName = decodeURIComponent(userName)
+    console.log({userName, decodeUserName, ctx})
   const result = await User.findOne({
     where: {
-      userName: userName,
+      userName: decodeUserName,
     },
   });
 
