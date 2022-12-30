@@ -1,6 +1,45 @@
 const koaRequest = require("koa2-request");
 
 exports.analysisVideoUrl = async (ctx) => {
+    //第一步获取视频ID
+    let req_query = ctx.request.query;
+    let videoUrl = req_query.videoUrl;
+    const url = decodeURIComponent(videoUrl)
+    let res_douyin = await koaRequest({ url: url })
+    console.log({videoUrl, url, res_douyin})
+    let str = res_douyin.request.uri.path
+    let videoId = { aweme_id: str.match(/[0-9]{4,}/g)[0].toString() }
+    console.log({videoId})
+    // 第二步获取原始链接
+    let response_play_addr = await koaRequest({
+        url: 'https://aweme-hl.snssdk.com//aweme/v1/aweme/detail/',
+        method: 'POST',
+        headers: {
+            'User-Agent': 'Aweme 8.6.0 rv:86018 (iPhone; iOS 12.4.1; zh_CN) Cronet',
+            'Content-Type': 'application/x-www-form-urlencoded',
+            // 'Cookie': 'tt_webid=6634504977698653700; __tea_sdk__user_unique_id=6634504977698653700; _ga=GA1.2.208565391.1537745943; sid_guard=71d5a5b4fa3e0c468238ecbd9d691d97%7C1552278354%7C153779948%7CWed%2C+24-Jan-2024+01%3A05%3A02+GMT; uid_tt=a300e88aa5c120b5611a6b13cab7c18a; sid_tt=71d5a5b4fa3e0c468238ecbd9d691d97; sessionid=71d5a5b4fa3e0c468238ecbd9d691d97; install_id=92266829107; ttreq=1$7197f8a6b34a717a2da10d65abebbd506367a3c5; odin_tt=3ab9acf1e079ef0b81e0c5a082f7e601078be15b11bbb9cd7d9d28373e3048ad825e194799f628d4d101a8e2ee131fd6',
+        },
+        json: true,
+        form: videoId
+    })
+    console.log({response_play_addr})
+    // 第三步无水印链接
+    await koaRequest({
+        url: response_play_addr.body.aweme_detail.video.play_addr.url_list[0],
+        headers: {
+            'User-Agent': 'Aweme 8.6.0 rv:86018 (iPhone; iOS 12.4.1; zh_CN) Cronet',
+        },
+    }).then(res => {
+        ctx.body = {
+            diff_time: new Date().getTime() - create_time,
+            errcode: 0,
+            msg: '抖音去水印ok',
+            url: res.request.uri.href
+        }
+    })
+}
+
+exports.analysisVideoUrl2 = async (ctx) => {
     let req_query = ctx.request.query;
     let videoUrl = req_query.videoUrl;
     if (videoUrl) {
