@@ -11,7 +11,8 @@ module.exports = () => {
     if(isNoNeedCheckLogin(url)) {
         return await next();
     }
-    const {userName, openId} = header;
+    const userName = header['x-user-name'];
+    const openId = header['x-open-id'];
     console.log({userName, openId, header, ctx}, !userName)
     if(!userName) {
         ctx.body = {

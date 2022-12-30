@@ -3,7 +3,7 @@ const logger = require("koa-logger");
 const bodyParser = require("koa-bodyparser");
 const { init: initDB } = require("./db");
 const koaRequestProxy = require("./middleware/koaRequestProxy");
-const login = require("./middleware/login");
+const loginCheck = require("./middleware/loginCheck");
 
 // routers
 const home = require("./routers/home");
@@ -15,7 +15,7 @@ const app = new Koa();
 app
   .use(logger())
   .use(bodyParser())
-  .use(login())
+  .use(loginCheck())
   .use(koaRequestProxy())
   .use(home.routes())
   .use(home.allowedMethods())
