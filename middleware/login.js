@@ -9,7 +9,7 @@ module.exports = () => {
     if(!userName) {
         ctx.body = {
             code: 302,
-            Locatioin: '/pages/login/index',
+            Location: '/pages/login/index',
             data: {},
         };
         return
