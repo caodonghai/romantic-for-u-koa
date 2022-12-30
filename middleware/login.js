@@ -6,6 +6,7 @@ module.exports = () => {
     let { url, header } = ctx;
     const {userName, openId} = header;
     const decodeUserName = decodeURIComponent(userName)
+    console.log({userName, decodeUserName, ctx})
     if(!decodeUserName) {
         ctx.body = {
             code: 302,
@@ -20,7 +21,6 @@ module.exports = () => {
 };
 
 async function isLoginWithUserName(userName, ctx) {
-console.log({userName, ctx})
   const result = await User.findOne({
     where: {
       userName: userName,
