@@ -18,8 +18,6 @@ exports.loginWithUserName = async (ctx) => {
     },
   });
 
-  console.log({ result });
-
   if (result && Object.keys(result).length) {
     ctx.body = {
       code: 200,
