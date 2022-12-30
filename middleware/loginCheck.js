@@ -13,7 +13,6 @@ module.exports = () => {
     }
     const userName = header['x-user-name'];
     const openId = header['x-open-id'];
-    console.log({userName, openId, header, ctx}, !userName)
     if(!userName) {
         ctx.body = {
             code: 302,
@@ -39,7 +38,7 @@ function isNoNeedCheckLogin(url) {
 
 async function isLoginWithUserName(userName, ctx) {
     const decodeUserName = decodeURIComponent(userName)
-    console.log({userName, decodeUserName, ctx})
+    // console.log({userName, decodeUserName, ctx})
   const result = await User.findOne({
     where: {
       userName: decodeUserName,

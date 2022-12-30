@@ -4,7 +4,6 @@ const { WishList } = require("../db");
  * 获取文件
  */
 exports.wishList = async (ctx, next) => {
-  console.log(JSON.stringify(ctx), "-------");
   const result = await WishList.findAndCountAll();
 
   ctx.body = {
@@ -62,7 +61,7 @@ exports.updateWish = async (ctx) => {
   const { request } = ctx;
   const { params } = ctx;
   let id = params.id;
-  console.log({ params, request });
+  // console.log({ params, request });
   const { wishTitle, wishDesc, userName, plannedTime } = request.body;
   const current = await WishList.findByPk(id);
 
