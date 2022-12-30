@@ -3,20 +3,23 @@ const logger = require("koa-logger");
 const bodyParser = require("koa-bodyparser");
 const { init: initDB } = require("./db");
 
-// middlewares
-const middlewares = require("./middleware/index");
+// middleWares
+const middleWares = require("./middleware/index");
 
 // routers
 const routers = require("./routers/index");
 
-console.log({middlewares, routers})
 
 const app = new Koa();
 app
   .use(logger())
   .use(bodyParser())
-  .use(middlewares(app))
-  .use(routers(app))
+  
+// 挂载自定义中间件
+middleWares.loadMiddleWares(app);
+
+// 挂载路由
+routers.loadRouters(app);
 
 const port = process.env.PORT || 80;
 async function bootstrap() {
