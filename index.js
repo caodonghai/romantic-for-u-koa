@@ -9,6 +9,8 @@ const middlewares = require("./middleware/index");
 // routers
 const routers = require("./routers/index");
 
+console.log({middlewares, routers})
+
 const app = new Koa();
 app
   .use(logger())

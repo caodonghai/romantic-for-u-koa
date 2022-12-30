@@ -1,5 +1,5 @@
-const koaRequestProxy = require("./koaRequestProxy");
 const loginCheck = require("./loginCheck");
+const koaRequestProxy = require("./koaRequestProxy");
 
 module.exports = (app) => {
     app
