@@ -2,29 +2,19 @@ const Koa = require("koa");
 const logger = require("koa-logger");
 const bodyParser = require("koa-bodyparser");
 const { init: initDB } = require("./db");
-const koaRequestProxy = require("./middleware/koaRequestProxy");
-const loginCheck = require("./middleware/loginCheck");
+
+// middlewares
+const middlewares = require("./middleware/index");
 
 // routers
-const home = require("./routers/home");
-const count = require("./routers/count");
-const wishList = require("./routers/wishList");
-const user = require("./routers/user");
+const routers = require("./routers/index");
 
 const app = new Koa();
 app
   .use(logger())
   .use(bodyParser())
-  .use(loginCheck())
-  .use(koaRequestProxy())
-  .use(home.routes())
-  .use(home.allowedMethods())
-  .use(count.routes())
-  .use(count.allowedMethods())
-  .use(wishList.routes())
-  .use(wishList.allowedMethods())
-  .use(user.routes())
-  .use(user.allowedMethods());
+  .use(middlewares(app))
+  .use(routers(app))
 
 const port = process.env.PORT || 80;
 async function bootstrap() {
