@@ -8,14 +8,24 @@ exports.analysisVideoUrl = async (ctx) => {
             const url = decodeURIComponent(videoUrl)
             console.log({req_query, videoUrl, url})
             const { videoStream, share_title } = await runDouyin(url);
+            console.log({videoStream, share_title})
             ctx.attachment(`${share_title}(无水印).mp4`);
             videoStream.pipe(ctx);
         } catch (e) {
-            console.log(e);
-            ctx.send('错误: ' + e);
+            console.log('catch---->', {e});
+            ctx.body = {
+                code: 500,
+                errMsg: '错误: '
+                data: {
+                    error: e
+                }
+            };
         }
     } else {
-        ctx.send('视频链接错误');
+        ctx.body = {
+            code: 500
+            errMsg: '视频链接错误'
+        }
     }
 };
 
@@ -36,7 +46,7 @@ async function request(url, type) {
 async function runDouyin(shareUrl) {
   // 1.根据分享的视频地址，通过重定向获取整个html信息
   const { data: html } = await request(shareUrl);
-  console.lo({shareUrl, html})
+  console.log({shareUrl, html})
   // 2.截取itemId， dytk 发起二次请求获取uriId
   const itemId = html.match(/(?<=itemId:\s\")\d+(?=\")/g)[0];
   const dytk = html.match(/(?<=dytk:\s\")(.*?)(?=\")/g)[0];
