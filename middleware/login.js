@@ -12,6 +12,7 @@ module.exports = () => {
         return await next();
     }
     const {userName, openId} = header;
+    console.log({userName, openId}, !userName)
     if(!userName) {
         ctx.body = {
             code: 302,
