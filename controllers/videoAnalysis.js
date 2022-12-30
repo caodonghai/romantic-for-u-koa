@@ -22,14 +22,16 @@ exports.analysisVideoUrl = async (ctx) => {
         json: true,
         form: videoId
     })
-    console.log({response_play_addr})
+    const nextUrlList = response_play_addr.body.aweme_detail.video.play_addr.url_list;
+    console.log({nextUrlList})
     // 第三步无水印链接
     await koaRequest({
-        url: response_play_addr.body.aweme_detail.video.play_addr.url_list[0],
+        url: nextUrlList[0],
         headers: {
             'User-Agent': 'Aweme 8.6.0 rv:86018 (iPhone; iOS 12.4.1; zh_CN) Cronet',
         },
     }).then(res => {
+        console.log('----->res',{res})
         ctx.body = {
             diff_time: new Date().getTime() - create_time,
             errcode: 0,
