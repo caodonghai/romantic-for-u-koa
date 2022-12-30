@@ -15,7 +15,7 @@ exports.analysisVideoUrl = async (ctx) => {
             console.log('catch---->', {e});
             ctx.body = {
                 code: 500,
-                errMsg: '错误: '
+                errMsg: '视频处理出错了！',
                 data: {
                     error: e
                 }
@@ -23,7 +23,7 @@ exports.analysisVideoUrl = async (ctx) => {
         }
     } else {
         ctx.body = {
-            code: 500
+            code: 500,
             errMsg: '视频链接错误'
         }
     }
