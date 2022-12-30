@@ -3,7 +3,7 @@ const controllers = require("../controllers/videoAnalysis");
 
 const router = new Router();
 
-// 更新计数
+// 视频解析
 router.get("/api/analysisVideoUrl", controllers.analysisVideoUrl);
 
 module.exports = router;
