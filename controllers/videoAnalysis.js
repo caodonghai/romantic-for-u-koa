@@ -36,7 +36,7 @@ async function request(url, type) {
 async function runDouyin(shareUrl) {
   // 1.根据分享的视频地址，通过重定向获取整个html信息
   const { data: html } = await request(shareUrl);
-  console({shareUrl, html})
+  console.lo({shareUrl, html})
   // 2.截取itemId， dytk 发起二次请求获取uriId
   const itemId = html.match(/(?<=itemId:\s\")\d+(?=\")/g)[0];
   const dytk = html.match(/(?<=dytk:\s\")(.*?)(?=\")/g)[0];
