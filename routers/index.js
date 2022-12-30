@@ -5,7 +5,7 @@ const user = require("./user");
 const videoAnalysis = require("./videoAnalysis");
 
 module.exports = {
-  loadMiddleWares: (app) => {
+  loadRouters: (app) => {
     app
     .use(home.routes())
     .use(home.allowedMethods())

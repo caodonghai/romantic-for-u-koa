@@ -2,7 +2,7 @@ const loginCheck = require("./loginCheck");
 const koaRequestProxy = require("./koaRequestProxy");
 
 module.exports = {
-  loadRouters: (app) => {
+  loadMiddleWares: (app) => {
     app
     .use(loginCheck())
     .use(koaRequestProxy())
