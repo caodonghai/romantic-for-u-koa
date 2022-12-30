@@ -1,11 +1,17 @@
 const { User } = require("../db");
+const noCkeckLogin = [
+    '/api/loginWithUserName',
+    '/rap2api/'
+]
 
 module.exports = () => {
   return async (ctx, next) => {
     // 使用
     let { url, header } = ctx;
+    if(isNoNeedCheckLogin(url)) {
+        return await next();
+    }
     const {userName, openId} = header;
-    console.log({userName, openId, ctx})
     if(!userName) {
         ctx.body = {
             code: 302,
@@ -24,6 +30,10 @@ module.exports = () => {
     return await next();
   };
 };
+
+function isNoNeedCheckLogin(url) {
+    return noCkeckLogin.some(item => url.startsWith(item))
+}
 
 async function isLoginWithUserName(userName, ctx) {
     const decodeUserName = decodeURIComponent(userName)
