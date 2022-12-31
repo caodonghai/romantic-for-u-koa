@@ -1,6 +1,6 @@
 const koaRequest = require("koa2-request");
 
-exports.analysisVideoUrl = async (ctx) => {
+exports.analysisVideoUrl1 = async (ctx) => {
     //第一步获取视频ID
     let req_query = ctx.request.query;
     let videoUrl = req_query.videoUrl;
@@ -22,7 +22,7 @@ exports.analysisVideoUrl = async (ctx) => {
     };
 }
 
-exports.analysisVideoUrl2 = async (ctx) => {
+exports.analysisVideoUrl = async (ctx) => {
     let req_query = ctx.request.query;
     let videoUrl = req_query.videoUrl;
     if (videoUrl) {
@@ -67,7 +67,7 @@ async function request(url, type) {
 
 async function runDouyin(shareUrl) {
   // 1.根据分享的视频地址，通过重定向获取整个html信息
-  const { data: html } = await request(shareUrl);
+  const html = await request(shareUrl);
   console.log({shareUrl, html})
   // 2.截取itemId， dytk 发起二次请求获取uriId
   const itemId = html.match(/(?<=itemId:\s\")\d+(?=\")/g)[0];
