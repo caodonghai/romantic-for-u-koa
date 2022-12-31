@@ -72,8 +72,8 @@ async function runDouyin(shareUrl) {
     const videoId = html.request.path.substr(13, 19);
     console.log({shareUrl, videoId})
     // https://m.douyin.com/share/video/6837396987122339084
-    // const long_url = `https://www.iesdouyin.com/web/api/v2/aweme/iteminfo/?item_ids=${videoId}`;
-    const long_url = `https://m.douyin.com/share/video/${videoId}`;
+    const long_url = `https://www.iesdouyin.com/web/api/v2/aweme/iteminfo/?item_ids=${videoId}`;
+    // const long_url = `https://m.douyin.com/share/video/${videoId}`;
     let videoJson = await request(long_url);
     videoJson = videoJson.toJSON();
     console.log({videoJson})
