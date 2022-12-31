@@ -76,7 +76,7 @@ async function runDouyin(shareUrl) {
     // const long_url = `https://www.iesdouyin.com/web/api/v2/aweme/iteminfo/?item_ids=${videoId}`;
     const long_url = `https://www.douyin.com/video/${videoId}`;
     let videoJson = await request(long_url);
-    videoJson = videoJson.toJSON();
+    // videoJson = videoJson.toJSON();
     console.log({videoJson})
     // 3.最后通过uri参数来调用视频下载接口
     const uriId = videoJson.item_list[0].video.play_addr.uri;
