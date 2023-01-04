@@ -130,4 +130,5 @@ module.exports = {
   Counter,
   WishList,
   User,
+  CountdownDays,
 };
