@@ -3,6 +3,7 @@ const count = require("./count");
 const wishList = require("./wishList");
 const user = require("./user");
 const videoAnalysis = require("./videoAnalysis");
+const countdownDays = require("./countdownDays");
 
 module.exports = {
   loadRouters: (app) => {
@@ -16,6 +17,8 @@ module.exports = {
     .use(user.routes())
     .use(user.allowedMethods())
     .use(videoAnalysis.routes())
-    .use(videoAnalysis.allowedMethods());
+    .use(videoAnalysis.allowedMethods())
+    .use(countdownDays.routes())
+    .use(countdownDays.allowedMethods());
   },
 };

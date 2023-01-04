@@ -85,10 +85,38 @@ const WishList = sequelize.define("WishList", {
   complete: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
 });
 
+
+// 定义愿望清单数据模型
+const CountdownDays = sequelize.define("CountdownDays", {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+  },
+  title: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  repeat: {
+    type: DataTypes.STRING,
+  },
+  theme: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  data: {
+    type: DataTypes.DATEONLY,
+    allowNull: false,
+  },
+  isEndTime: { type: DataTypes.BOOLEAN, allowNull: false },
+});
+
+
 // 数据库初始化方法
 async function init() {
   await Counter.sync({ alter: true });
   await WishList.sync({ alter: true });
+  await CountdownDays.sync({ alter: true });
   await User.sync({ alter: true });
 }
 
