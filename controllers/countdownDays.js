@@ -42,10 +42,10 @@ exports.createCountdownDay = async (ctx) => {
   const { request } = ctx;
   const { body = {} } = request;
 
-  const { title, data, isEndTime, repeat, theme } = body;
+  const { title, data, isEndTime, repeat, theme, userName } = body;
 
   await CountdownDays.create({
-      title, data, isEndTime, repeat, theme
+      title, data, isEndTime, repeat, theme, userName
   });
 
   ctx.body = {
@@ -59,10 +59,10 @@ exports.updateCountdownDay = async (ctx) => {
   const { params } = ctx;
   let id = params.id;
   // console.log({ params, request });
-  const { title, data, isEndTime, repeat, theme } = request.body;
+  const { title, data, isEndTime, repeat, theme, userName } = request.body;
   const current = await CountdownDays.findByPk(id);
 
-  await current.update({ title, data, isEndTime, repeat, theme });
+  await current.update({ title, data, isEndTime, repeat, theme, userName });
 
   ctx.body = {
     code: 200,
