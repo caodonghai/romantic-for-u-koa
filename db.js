@@ -108,6 +108,10 @@ const CountdownDays = sequelize.define("CountdownDays", {
     type: DataTypes.DATEONLY,
     allowNull: false,
   },
+  userName: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   isEndTime: { type: DataTypes.BOOLEAN, allowNull: false },
 });
 
